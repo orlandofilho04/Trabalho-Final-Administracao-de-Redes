@@ -1,6 +1,6 @@
-## Projeto 01 - Projeto de Administração de Redes usando Vagrant com 3 VMs
+## Trabalho Final de Administração de Redes de Computadores
 
-Você é responsável por configurar um ambiente de laboratório de administração de redes com 3 máquinas virtuais (VMs) usando o Vagrant. Este ambiente de laboratório será usado para fins educacionais e de treinamento em administração de redes.
+Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede empresarial usando tecnologia Linux, com ênfase em serviços como DHCP, DNS, Web, FTP, NFS e virtualização com Vagrant e Docker.
 
 ## Estrutura do Projeto
 
@@ -25,34 +25,19 @@ Você é responsável por configurar um ambiente de laboratório de administraç
 
 ## Configuração de Rede
 
-1. sevidor-web-vm
-   - IP Privado Estático (192.168.56.15)
+1. servicos-vm
+   - IP Privado Estático (192.168.33.10)
    - DNS
      - 8.8.8.8
    - Atribuição do IP privado estático (192.168.56.14) como Gateway padrão da rede.
-2. servidor-bd-vm
-   - IP Privado Estático (192.168.56.16)
-   - DNS
-     - 8.8.8.8
-   - Atribuição do IP privado estático (192.168.56.14) como Gateway padrão da rede.
-3. gateway-vm
-   - IP Privado Estático (192.168.56.14)
-   - IP Público DHCP - bridge com a interface de rede externa.
-   - IP Privado Estático - adicionado a mesma interface de rede do IP público DHCP.
-   - Gateway e DNS padrão da rede (sem alterações).
-   - Liberação de portas para tráfego de pacotes entre as redes.
-   - NAT da interface de rede externa mascarado na interface de rede interna.
+     1.1. dhcphost -
 
 ## Provisionamento
 
 Os scripts de provisionamento de cada VM está localizado na parte SHELL no próprio arquivo "vagrantfile". Cada script executa as configurações e a instalação dos serviços necessários para cada VM funcionar conforme sua função. Estão dispostos no arquivo "vagrantfile", pois em sala de aula, me falou para fazer assim.
 
-1. sevidor-web-vm - Servidor Web
-   - Instalação do apache.
-2. servidor-bd-vm - Servidor de Banco de Dados
-   - Instalação do mysql-server.
-3. gateway-vm - Gateway
-   - Configura-o como Gateway padrão da rede.
+1. servicos-v
+   - Criação de cada container contendo o serviço:
 
 ## Acesso à Internet
 
