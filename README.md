@@ -14,6 +14,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - Vagrant 2.2.19
 - VirtualBox 6.1
 - Imagem ISO do Ubuntu Server 20.04 LTS já na pasta "/root/.vagrant.d/boxes"
+- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS
 
 ## Instruções de Uso
 
@@ -39,6 +40,14 @@ Os scripts de provisionamento de cada VM está localizado na parte SHELL no pró
 1. servicos-v
    - Criação de cada container contendo o serviço:
 
-## Acesso à Internet
+## Configuração dos Serviços
 
-Por meio da conexão à internet recebida por bridge ao DHCP da gateway-vm, a interface de rede interna da gateway-vm recebe essa conexão e atribui ela ao seu IP privado estático, que por sua vez está na mesma faixa dos IPs das VMs sevidor-web-vm e servidor-bd-vm, cada uma dessas VMs estão configuradas com IP da gateway-vm atuando como Gateway padrão da rede, assim as VMs sevidor-web-vm e servidor-bd-vm dependem da gateway-vm para terem acesso à internet.
+1. DHCP: O serviço DHCP estará ouvindo na porta 67 UDP.
+2. DNS: O serviço DNS estará ouvindo na porta 53 TCP/UDP.
+3. Servidor Web: O servidor web estará acessível na porta 80 TCP.
+4. Servidor FTP: O servidor FTP estará acessível na porta 21 TCP.
+5. Servidor NFS: O servidor NFS estará acessível na porta 2049 TCP/UDP.
+
+## Funcionamento
+
+O arquivo `Vagrantfile` está configurado para criar uma máquina virtual Ubuntu e provisionar contêineres Docker para cada serviço.
