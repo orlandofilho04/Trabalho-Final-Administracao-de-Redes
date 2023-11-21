@@ -13,8 +13,13 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - Considerar sistema de criação Linux Mint 21.2
 - Vagrant 2.2.19
 - VirtualBox 6.1
+- Docker 24.0.5
 - Imagem ISO do Ubuntu Server 20.04 LTS já na pasta "/root/.vagrant.d/boxes"
 - Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/openebs/nfs-server-alpine", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/ustclug/ftp", "DHCP: https://hub.docker.com/r/linuxkit/dhcpcd"
+
+## Topologia
+
+## Segmentação de Sub-Redes
 
 ## Instruções de Uso
 
@@ -24,7 +29,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 4. Após verificar os status de cada VM, digite "vagrant ssh" junto com o nome da VM (servicos-vm) para iniciar o shell de cada uma.
 5. Por fim, desligue as VMs digitando o comando "vagrant halt", e caso queira apaga-las, digite o comando "vagrant destroy".
 
-## Configuração de Rede
+## Descrição de Rede
 
 1. servicos-vm
    - IP Privado Estático (192.168.33.10)
@@ -49,3 +54,5 @@ Os scripts de provisionamento de cada VM está localizado na parte SHELL no pró
 ## Funcionamento
 
 O arquivo `Vagrantfile` está configurado para criar uma máquina virtual Ubuntu e provisionar contêineres Docker para cada serviço.
+
+## Resultados dos Testes
