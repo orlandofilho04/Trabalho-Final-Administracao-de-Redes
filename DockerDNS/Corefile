@@ -1,0 +1,9 @@
+example.org {
+    file /etc/coredns/db.example.org
+    transfer {
+        to * 192.168.56.10
+    }
+    log
+    errors
+    debug
+}
