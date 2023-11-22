@@ -21,5 +21,6 @@ Vagrant.configure("2") do |config|
       vm1.vm.provision "shell", path: "provisioners/dhcp_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/web_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/dns_provision.sh"
+      vm1.vm.provision "shell", path: "provisioners/nfs_provision.sh"
     end
   end
