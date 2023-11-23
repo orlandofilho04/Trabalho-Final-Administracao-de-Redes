@@ -1,0 +1,5 @@
+sudo ufw enable 
+
+sudo mkdir /acesso
+sudo apt install nfs-common
+sudo mount 192.168.56.10:/nfsshare /acesso
