@@ -2,8 +2,25 @@
 
 Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede empresarial usando tecnologia Linux, com ênfase em serviços como DHCP, DNS, Web, FTP, NFS e virtualização com Vagrant e Docker.
 
+## Instruções de Uso
+
+1. Clone o repositório do Github.
+2. Acesse-o pelo terminal a pasta onde o projeto foi clonado e execute o comando "vagrant up" para iniciar a criação das VMs.
+3. Verifique os status de cada VM com o comando "vagrant status" e veja se estão criadas ou não.
+4. Após verificar os status de cada VM, digite "vagrant ssh" junto com o nome da VM (servicos-vm) para iniciar o shell de cada uma.
+5. Por fim, desligue as VMs digitando o comando "vagrant halt", e caso queira apaga-las, digite o comando "vagrant destroy".
+
 ## Estrutura do Projeto
 
+- DockerDHCP
+  - dhcpd.conf
+- DockerDNS
+  - Corefile
+  - db.example.org
+- provisioners
+  - dhcp_provision.sh
+  - dns_provision.sh
+  - web_provision.sh
 - shared_folder
 - vagrantfile
 - README.md
@@ -21,18 +38,10 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 
 ## Segmentação de Sub-Redes
 
-## Instruções de Uso
-
-1. Clone o repositório do Github.
-2. Acesse-o pelo terminal a pasta onde o projeto foi clonado e execute o comando "vagrant up" para iniciar a criação das VMs.
-3. Verifique os status de cada VM com o comando "vagrant status" e veja se estão criadas ou não.
-4. Após verificar os status de cada VM, digite "vagrant ssh" junto com o nome da VM (servicos-vm) para iniciar o shell de cada uma.
-5. Por fim, desligue as VMs digitando o comando "vagrant halt", e caso queira apaga-las, digite o comando "vagrant destroy".
-
 ## Descrição de Rede
 
 1. servicos-vm
-   - IP Privado Estático (192.168.33.10)
+   - IP Privado Estático (192.168.56.10)
    - DNS
      - 8.8.8.8
 
