@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
     # MAQUINA DE GATEWAY
-    config.vm.define "VMP" do |vm1|
+    config.vm.define "vm1" do |vm1|
       vm1.vm.hostname = "vm1"
       vm1.vm.box = "ubuntu/focal64"
       vm1.vm.provider "virtualbox" do |vb|
@@ -13,13 +13,27 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       end
       vm1.vm.network "private_network", type: "private_network", ip: "192.168.56.10"
-      vm1.vm.synced_folder "./DockerDHCP", "/vagrant_DockerDHCP"
+      vm1.vm.synced_folder "./DockerDHCP", "/vagrantDHCP"
       vm1.vm.synced_folder "/var/www/html", "/var/www/html"
       vm1.vm.synced_folder "/run/systemd/resolve/", "/etc/systemd/resolve/"
       vm1.vm.synced_folder "./DockerDNS", "/vagrantDNS"
+      #vm1.vm.synced_folder "./DockerFTP", "/vagrantFTP"
       vm1.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "192.168.56.10"
       vm1.vm.provision "shell", path: "provisioners/dhcp_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/web_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/dns_provision.sh"
+      vm1.vm.provision "shell", path: "provisioners/ftp_provision.sh"
+    end
+    #MAQUINAS CLIENTES
+    config.vm.define "vm2" do |vm2|
+      vm2.vm.hostname = "vm2"
+      vm2.vm.box = "ubuntu/focal64"
+      vm2.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 2
+        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      end
+      vm2.vm.network "private_network", type: "dhcp"
     end
   end
