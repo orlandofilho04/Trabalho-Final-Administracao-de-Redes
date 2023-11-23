@@ -32,7 +32,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - VirtualBox 6.1
 - Docker 24.0.5
 - Imagem ISO do Ubuntu Server 20.04 LTS já na pasta "/root/.vagrant.d/boxes"
-- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/openebs/nfs-server-alpine", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/ustclug/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
+- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/itsthenetwork/nfs-server-alpine", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/ustclug/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
 
 ## Topologia
 
