@@ -15,3 +15,12 @@ sudo exportfs -a
 docker login
 
 docker push NOOME DA IMAGEM
+
+sudo docker build -f Dockerfile -t orlandofilho04/nfs_ubuntu:0.0 .
+sudo docker build -f Dockerfile -t thiagofelix/nfs_ubuntu:0.0 .
+docker build -f Dockerfile -t thiagofelix/nfs_ubuntu:0.0 .
+sudo docker build -f Dockerfile -t thiagofelix/nfs_ubuntu:0.0 .
+nano Dockerfile 
+sudo docker build -f Dockerfile -t thiagofelix/nfs_ubuntu:0.0 .
+nano Dockerfile 
+sudo docker build -f Dockerfile -t thiagofelix/nfs_ubuntu:0.0 .
