@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
       vm1.vm.synced_folder "./DockerFTP", "/vagrantFTP"
       vm1.vm.synced_folder "./DockerNFS", "/vagrantNFS"
       vm1.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "192.168.56.10"
+      vm1.vm.network "forwarded_port", guest: 2049, host: 2049, host_ip: "192.168.56.10"
       vm1.vm.provision "shell", path: "provisioners/dhcp_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/web_provision.sh"
       vm1.vm.provision "shell", path: "provisioners/dns_provision.sh"

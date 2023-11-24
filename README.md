@@ -76,7 +76,7 @@ A topologia de rede resultante desse trabalho é uma rede privada com duas máqu
 - Sub-rede da VM2 (Cliente):
   - Interface 1:
     - Tipo: Rede Privada
-    - Endereço IP: 192.168.58.x (de 0 a 254, menos o 10, reservado para vm1) Determinado a partir do DHP
+    - Endereço IP: 192.168.56.x (de 0 a 254, menos o 10, reservado para vm1) Determinado a partir do DHP
     - Máscara de Sub-rede: /24 (255.255.255.0)
 
 ## Provisionamento
@@ -132,7 +132,7 @@ As máquinas estão provisionadas com scripts shell para atualização de pacote
 O script de provisionamento DHCP automatiza o processo de instalação do Docker na máquina virtual, baixa a imagem de um servidor DHCP, copia o arquivo de configuração dhcpd.conf para dentro do contêiner e inicia um contêiner Docker com a configuração apropriada para servir como servidor DHCP na rede da máquina virtual, com isso ele atribui endereços IP automaticamente aos dispositivos na rede.
 O script de provisionamento DNS automatiza a configuração de um contêiner Docker com o CoreDNS, especificando os arquivos de configuração e de banco de dados necessários para o funcionamento do servidor DNS e redirecionando as portas apropriadas para permitir o tráfego DNS, com isso ele resolve os nomes de domínio dentro da rede e configura registros DNS.
 O script de provisionamento FTP configura um servidor FTP dentro de um contêiner Docker, especificando as portas a serem usadas, mapeando um diretório da máquina hospedeira para o contêiner, definindo credenciais de acesso e permitindo o reinício automático do contêiner em caso de falha, com isso ele permiti a transferência de arquivos na rede.
-O script de provisionamento NFs ... , com isso ele permite compartilhar diretórios e arquivos entre máquinas na rede.
+O script de provisionamento NFS ... , com isso ele permite compartilhar diretórios e arquivos entre máquinas na rede.
 O script de provisionamento Web configura e inicia um servidor web Apache dentro de um contêiner Docker na máquina virtual, permitindo o acesso aos arquivos presentes no diretório /var/www/html da máquina hospedeira através do servidor web no contêiner, com isso ele fornece serviços de hospedagem de sites internos.
 
 ## Resultados dos Testes

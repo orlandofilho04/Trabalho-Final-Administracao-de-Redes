@@ -3,3 +3,15 @@ sudo ufw enable
 sudo mkdir /acesso
 sudo apt install nfs-common
 sudo mount 192.168.56.10:/nfsshare /acesso
+sudo mount -v 172.17.0.5:/nfsshare /acesso
+sudo iptables -L
+
+sudo docker run -d --restart always -e SYNC=true --name nfs -p 2049:2049 --privileged -v /DockerNFS/:/nfsshare -e SHARED_DIRECTORY=/nfsshare  docker pull thiagofelix/nfs_ubuntu
+
+
+sudo exportfs -a
+/var/nfsshare *(rw,fsid=0,sync,no_subtree_check,no_auth_nlm,insecure,no_root_squash)
+
+docker login
+
+docker push NOOME DA IMAGEM
