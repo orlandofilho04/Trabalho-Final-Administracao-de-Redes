@@ -27,6 +27,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
   - ftp_provision.sh
   - nfs_provision.sh
   - web_provision.sh
+  - vm2_provision.sh
 - shared_folder
   - index.html
 - vagrantfile
@@ -39,7 +40,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - VirtualBox 6.1
 - Docker 24.0.5
 - Imagem ISO do Ubuntu Server 20.04 LTS já na pasta "/root/.vagrant.d/boxes"
-- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/itsthenetwork/nfs-server-alpine", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/bogem/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
+- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/thiagofelix/nfs_ubuntu", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/bogem/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
 
 ## Topologia
 
@@ -107,13 +108,18 @@ Os scripts de provisionamento de cada VM está localizado na pasta "provisioners
 - nfs_provision.sh
 
   - apt install -y docker.io: Instala o Docker na máquina virtual
-  - docker pull itsthenetwork/nfs-server-alpine: Baixa a imagem do Docker do repositório Docker Hub
-  -
+  - docker pull thiagofelix/nfs_ubuntu: Baixa a imagem do Docker do repositório Docker Hub
+  - sudo docker run -d --restart always -e SYNC=true --name nfs -p 2049:2049 --privileged -v /vagrantNFS:/nfsshare -e SHARED_DIRECTORY=/nfsshare thiagofelix/nfs_ubuntu: Inicia um contêiner Docker a partir da imagem, define a política de reinicialização do contêiner como "always", ou seja, o contêiner será reiniciado automaticamente se parar por algum motivo, define a variável de ambiente SYNC como true , atribui o nome "nfs" ao contêiner para identificação mais fácil, mapeia a porta 2049 do host para a porta 2049 do contêiner, concede ao contêiner privilégios adicionais, mapeia o diretório /vagrantNFS da máquina hospedeira para o diretório /nfsshare dentro do contêiner, este diretório compartilhado será disponibilizado via NFS e define o diretório a ser compartilhado via NFS como /nfsshare
 
 - web_provision.sh
+
   - apt install -y docker.io: Instala o Docker na máquina virtual
   - docker pull httpd: Baixa a imagem do Docker do repositório Docker Hub
   - sudo docker run -d -v /var/www/html:/usr/local/apache2/htdocs/ --restart always -p 80:80 httpd: Inicia um contêiner Docker a partir da imagem do Apache HTTP Server, mapeando o diretório /var/www/html da máquina hospedeira para o diretório /usr/local/apache2/htdocs/ dentro do contêiner e faz o mapeamento da porta 80 do host para a porta 80 do contêiner, permitindo o acesso ao servidor web Apache pelo navegador
+
+- vm2_provision.sh
+  - apt install -y nfs-common: Instala o pacote nfs-common na máquina virtual
+  - sudo mkdir /acesso: Cria um diretório chamado acesso na raiz do sistema de arquivos
 
 ## Configuração dos Serviços
 
@@ -132,7 +138,9 @@ As máquinas estão provisionadas com scripts shell para atualização de pacote
 O script de provisionamento DHCP automatiza o processo de instalação do Docker na máquina virtual, baixa a imagem de um servidor DHCP, copia o arquivo de configuração dhcpd.conf para dentro do contêiner e inicia um contêiner Docker com a configuração apropriada para servir como servidor DHCP na rede da máquina virtual, com isso ele atribui endereços IP automaticamente aos dispositivos na rede.
 O script de provisionamento DNS automatiza a configuração de um contêiner Docker com o CoreDNS, especificando os arquivos de configuração e de banco de dados necessários para o funcionamento do servidor DNS e redirecionando as portas apropriadas para permitir o tráfego DNS, com isso ele resolve os nomes de domínio dentro da rede e configura registros DNS.
 O script de provisionamento FTP configura um servidor FTP dentro de um contêiner Docker, especificando as portas a serem usadas, mapeando um diretório da máquina hospedeira para o contêiner, definindo credenciais de acesso e permitindo o reinício automático do contêiner em caso de falha, com isso ele permiti a transferência de arquivos na rede.
-O script de provisionamento NFS ... , com isso ele permite compartilhar diretórios e arquivos entre máquinas na rede.
+O script de provisionamento NFS configura um servidor NFS em um contêiner Docker na máquina virtual, compartilhando o diretório /vagrantNFS da máquina hospedeira para que possa ser acessado por outros dispositivos na rede através do protocolo NFS, com isso ele permite compartilhar diretórios e arquivos entre máquinas na rede.
 O script de provisionamento Web configura e inicia um servidor web Apache dentro de um contêiner Docker na máquina virtual, permitindo o acesso aos arquivos presentes no diretório /var/www/html da máquina hospedeira através do servidor web no contêiner, com isso ele fornece serviços de hospedagem de sites internos.
+O script de provisionamento VM2 realiza as etapas necessárias para configurar o cliente NFS na máquina virtual, incluindo a instalação dos pacotes necessários e a criação de um diretório onde sistemas de arquivos remotos podem ser montados.
+A máquina 2 (VM2) serve para acessar todos os serviços dispostos na máquina 1 (VM1) para fins de testes.
 
 ## Resultados dos Testes
