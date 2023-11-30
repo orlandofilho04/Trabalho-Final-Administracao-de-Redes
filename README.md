@@ -141,7 +141,7 @@ O script de provisionamento DHCP automatiza o processo de instalação do Docker
 O script de provisionamento DNS automatiza a configuração de um contêiner Docker com o CoreDNS, especificando os arquivos de configuração e de banco de dados necessários para o funcionamento do servidor DNS e redirecionando as portas apropriadas para permitir o tráfego DNS, com isso ele resolve os nomes de domínio dentro da rede e configura registros DNS.
 O script de provisionamento FTP configura um servidor FTP dentro de um contêiner Docker, especificando as portas a serem usadas, mapeando um diretório da máquina hospedeira para o contêiner, definindo credenciais de acesso e permitindo o reinício automático do contêiner em caso de falha, com isso ele permiti a transferência de arquivos na rede.
 O script de provisionamento NFS configura um servidor NFS em um contêiner Docker na máquina virtual, compartilhando o diretório /vagrantNFS da máquina hospedeira para que possa ser acessado por outros dispositivos na rede através do protocolo NFS, com isso ele permite compartilhar diretórios e arquivos entre máquinas na rede.
-O script de provisionamento Web configura e inicia um servidor web Apache dentro de um contêiner Docker na máquina virtual, permitindo o acesso aos arquivos presentes no diretório /var/www/html da máquina hospedeira através do servidor web no contêiner, com isso ele fornece serviços de hospedagem de sites internos.
+O script de provisionamento Web configura e inicia um servidor web Apache dentro de um contêiner Docker na máquina virtual, permitindo o acesso aos arquivos presentes no diretório ./DockerWeb/ da máquina hospedeira através do servidor web no contêiner, com isso ele fornece serviços de hospedagem de sites internos.
 O script de provisionamento VM2 realiza as etapas necessárias para configurar o cliente NFS na máquina virtual, incluindo a instalação dos pacotes necessários e a criação de um diretório onde sistemas de arquivos remotos podem ser montados.
 A máquina 2 (VM2) serve para acessar todos os serviços dispostos na máquina 1 (VM1) para fins de testes.
 
@@ -150,14 +150,9 @@ A máquina 2 (VM2) serve para acessar todos os serviços dispostos na máquina 1
 - Teste servidor DHCP
   - ![servidordhcp1](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/c794d18e-334b-403f-9b06-4abd270d05fd)
   - ![servidordhcp2](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/b91c204e-8fec-43f6-9b4b-d1efeb8c8b71)
-  
 - Teste servidor DNS
   - ![servidordns](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/1fc3ad10-4435-4b5d-8cab-e4bdfa534b8a)
-  
 - Teste servidor Web(Apache)
   - ![servidorweb](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/ed9818d0-04a8-40da-91bc-112ef2c9d4bd)
-  
 - Teste servidor FTP
   - ![servidorftp](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/84276ac8-9a4c-48b8-b88f-9a086b53e95f)
-
-
