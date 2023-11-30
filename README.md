@@ -154,5 +154,5 @@ A máquina 2 (VM2) serve para acessar todos os serviços dispostos na máquina 1
   - ![servidordns](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/1fc3ad10-4435-4b5d-8cab-e4bdfa534b8a) <br> Demostra o comando 'dig' com o domínio 'example.com' e também usa a ferramente 'nslookup', mostrando a resolução de nomes nesse domínio, e mostra o arquivo resolv.conf os nomes.
 - Teste servidor Web(Apache)
   - ![servidorweb](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/ed9818d0-04a8-40da-91bc-112ef2c9d4bd) <br> Através da máquina 2 (vm2) utilizando o comando 'wget', o arquivo 'index.html' é baixado através do IP e porta do servidor apache da máquina 1 (vm1)
-  - Teste servidor FTP
+- Teste servidor FTP
   - ![servidorftp](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/84276ac8-9a4c-48b8-b88f-9a086b53e95f) <br> Utilizando o comando 'ftp' na máquina 2 (vm2) com IP e porta da máquina 1 (vm1), servidor FTP, realiza o login e com o comando 'get' realiza o download do arquivo para a máquina 2 (vm2)
