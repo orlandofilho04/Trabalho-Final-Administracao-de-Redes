@@ -15,12 +15,16 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - DockerDHCP
   - dhcpd.conf
 - DockerDNS
-  - Corefile
-  - db.example.org
+  - example.com.zone
+  - named.conf
+  - named.conf.local
+  - rndc.key
 - DockerFTP
   - vsftpd.conf
 - DockerNFS
   - teste.txt
+- DockerWeb
+  - index.html
 - provisioners
   - dhcp_provision.sh
   - dns_provision.sh
@@ -28,8 +32,6 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
   - nfs_provision.sh
   - web_provision.sh
   - vm2_provision.sh
-- shared_folder
-  - index.html
 - vagrantfile
 - README.md
 
@@ -40,7 +42,7 @@ Neste projeto, você se concentrará em projetar, implantar e gerenciar uma rede
 - VirtualBox 6.1
 - Docker 24.0.5
 - Imagem ISO do Ubuntu Server 20.04 LTS já na pasta "/root/.vagrant.d/boxes"
-- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/thiagofelix/nfs_ubuntu", "DNS: https://hub.docker.com/r/coredns/coredns", "FTP: https://hub.docker.com/r/bogem/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
+- Imagens Docker dos serviços a serem utilizadas: DHCP, DNS, Web, FTP e NFS. "Web: https://hub.docker.com/_/httpd", "NFS: https://hub.docker.com/r/thiagofelix/nfs_ubuntu", "DNS: https://hub.docker.com/r/ubuntu/bind9", "FTP: https://hub.docker.com/r/bogem/ftp", "DHCP: https://hub.docker.com/r/networkboot/dhcpd"
 
 ## Topologia
 
@@ -96,8 +98,8 @@ Os scripts de provisionamento de cada VM está localizado na pasta "provisioners
 - dns_provision.sh
 
   - apt install -y docker.io: Instala o Docker na máquina virtual
-  - docker pull coredns/coredns: Baixa a imagem do Docker do repositório Docker Hub
-  - sudo docker run -d -v /vagrantDNS/Corefile:/etc/coredns/Corefile -v /vagrantDNS/db.example.org:/etc/coredns/db.example.org --restart always -p 8053:53 -p 8053:53/udp coredns/coredns: Inicia um contêiner Docker a partir da imagem do CoreDNS, mapeando o arquivo de configuração Corefile da máquina hospedeira (localizado em /vagrantDNS) para dentro do contêiner no diretório /etc/coredns/Corefile, mapeando um arquivo de banco de dados db.example.org da máquina hospedeira (localizado em /vagrantDNS) para dentro do contêiner no diretório /etc/coredns/db.example.org e mapeia a porta 8053 do host para a porta 53 do contêiner (TCP e UDP)
+  - docker pull ubuntu/bind9: Baixa a imagem do Docker do repositório Docker Hub
+  - sudo docker run -d --restart always --name dns -e TZ=UTC -p 30053:53 -p 30053:53/udp -v /vagrantDNS:/etc/bind ubuntu/bind9:9.16-20.04_beta: Inicia um contêiner Docker a partir da imagem do Bind9, mapeando a porta 300053 do host para a porta 53 do contêiner (TCP e UDP) e mapeia os arquivos de configurações do Bind9 da máquina hospedeira (localizado em /vagrantDNS) para dentro do contêiner no diretório /etc/bind
 
 - ftp_provision.sh
 
@@ -115,7 +117,7 @@ Os scripts de provisionamento de cada VM está localizado na pasta "provisioners
 
   - apt install -y docker.io: Instala o Docker na máquina virtual
   - docker pull httpd: Baixa a imagem do Docker do repositório Docker Hub
-  - sudo docker run -d -v /var/www/html:/usr/local/apache2/htdocs/ --restart always -p 80:80 httpd: Inicia um contêiner Docker a partir da imagem do Apache HTTP Server, mapeando o diretório /var/www/html da máquina hospedeira para o diretório /usr/local/apache2/htdocs/ dentro do contêiner e faz o mapeamento da porta 80 do host para a porta 80 do contêiner, permitindo o acesso ao servidor web Apache pelo navegador
+  - sudo docker run -d -v /vagrantWeb:/usr/local/apache2/htdocs/ --restart always -p 80:80 httpd: Inicia um contêiner Docker a partir da imagem do Apache HTTP Server, mapeando o diretório /vagrantWeb da máquina hospedeira para o diretório /usr/local/apache2/htdocs/ dentro do contêiner e faz o mapeamento da porta 80 do host para a porta 80 do contêiner, permitindo o acesso ao servidor web Apache pelo navegador
 
 - vm2_provision.sh
   - apt install -y nfs-common: Instala o pacote nfs-common na máquina virtual
