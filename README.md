@@ -148,11 +148,11 @@ A máquina 2 (VM2) serve para acessar todos os serviços dispostos na máquina 1
 ## Resultados dos Testes
 
 - Teste servidor DHCP
-  - ![servidordhcp1](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/c794d18e-334b-403f-9b06-4abd270d05fd)
-  - ![servidordhcp2](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/b91c204e-8fec-43f6-9b4b-d1efeb8c8b71)
+  - ![servidordhcp1](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/c794d18e-334b-403f-9b06-4abd270d05fd) Demostra o log do container, configurado, DHCP na máquina 1 (vm1) e testa a conexão a máquina 2 (vm2)
+  - ![servidordhcp2](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/b91c204e-8fec-43f6-9b4b-d1efeb8c8b71) Demonstra na máquina 2 (vm2) que a rede está configurada como DHCP, estando na mesma rede (faixa de IP) e conecta a máquina 1 (vm1)
 - Teste servidor DNS
-  - ![servidordns](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/1fc3ad10-4435-4b5d-8cab-e4bdfa534b8a)
+  - ![servidordns](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/1fc3ad10-4435-4b5d-8cab-e4bdfa534b8a) Demostra o comando 'dig' com o domínio 'example.com' e também usa a ferramente 'nslookup', mostrando a resolução de nomes nesse domínio, e mostra o arquivo resolv.conf os nomes.
 - Teste servidor Web(Apache)
-  - ![servidorweb](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/ed9818d0-04a8-40da-91bc-112ef2c9d4bd)
-- Teste servidor FTP
-  - ![servidorftp](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/84276ac8-9a4c-48b8-b88f-9a086b53e95f)
+  - ![servidorweb](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/ed9818d0-04a8-40da-91bc-112ef2c9d4bd) Através da máquina 2 (vm2) utilizando o comando 'wget', o arquivo 'index.html' é baixado através do IP e porta do servidor apache da máquina 1 (vm1)
+  - Teste servidor FTP
+  - ![servidorftp](https://github.com/orlandofilho04/Trabalho-Final-Administracao-de-Redes/assets/116850972/84276ac8-9a4c-48b8-b88f-9a086b53e95f) Utilizando o comando 'ftp' na máquina 2 (vm2) com IP e porta da máquina 1 (vm1), servidor FTP, realiza o login e com o comando 'get' realiza o download do arquivo para a máquina 2 (vm2)
